@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     GameObject gameManagerObj;
     CircleCollider2D circleCollider;
 
+    public GameObject objPart;
 
     GameManager gameManager;
 
@@ -52,8 +53,10 @@ public class Ball : MonoBehaviour
     {
 
         gameManager.foiDestuido = true;
-        DesactivateRb();
-        StartCoroutine(AtivaParticula());
+        Instantiate(objPart, transform.position, transform.rotation);
+        Destroy(gameObject);
+        //DesactivateRb();
+      //  StartCoroutine(AtivaParticula());
 
     }
     public IEnumerator AtivaParticula()
@@ -62,7 +65,7 @@ public class Ball : MonoBehaviour
         circleCollider.enabled = false;
         particleSystem.Play();
         yield return new WaitForSeconds(particleSystem.main.startLifetime.constantMax);
-        Destroy(gameObject);
+       
 
     }
 }
